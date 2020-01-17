@@ -27,26 +27,26 @@ Cypress.Commands.add("login", (username, password) => {
 		username = 'guest';
 		password = 'anonymous';
 	}
-    cy.request({
+	cy.request({
 		method: 'POST',
-	   	url: 'https://skolaris.net/auth/token',
-   		body: {
+		url: 'https://skolaris.net/auth/token',
+		body: {
 			username: username,
-    	  	password: password,
+			password: password,
 			grant_type: 'password'
 		},
 		form: true
-    })
-	.then((response) => {
-    	// response.body is automatically serialized into JSON
-	    expect(response.body).to.have.property('access_token');
-		localStorage.setItem('__amplify__authorizationData', JSON.stringify({
-			'data': {
-				'token': response.body.access_token,
-				'username': username
-			}
-		}));
-	});
+	})
+		.then((response) => {
+			// response.body is automatically serialized into JSON
+			expect(response.body).to.have.property('access_token');
+			localStorage.setItem('__amplify__authorizationData', JSON.stringify({
+				'data': {
+					'token': response.body.access_token,
+					'username': username
+				}
+			}));
+		});
 });
 
 Cypress.Commands.add('activateOrganisation', (id) => {
@@ -58,4 +58,3 @@ Cypress.Commands.add('activateOrganisation', (id) => {
 		'data': id
 	}));
 });
-
