@@ -3,10 +3,10 @@ describe('Demo school dashboard', () => {
 		cy.login();
 		cy.activateOrganisation();
 		cy.visit('/');
+		cy.contains('Dashboard', { 'timeout': 10000 });
 	});
 
-	it('Successfully activates', () => {
-		cy.contains('Dashboard');
+	it('Shows class groups, teachers and subjects', () => {
 		cy.contains('Demo school');
 		cy.contains('Class groups');
 		cy.contains('5A');

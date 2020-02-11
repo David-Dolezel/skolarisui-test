@@ -2,11 +2,7 @@ describe('Dashboard for no active organisation', function() {
 	beforeEach(() => {
 		cy.login();
 		cy.visit('/');
-	});
-
-	it('Successfully loads for guest', () => {
-		cy.contains('Welcome to Skolaris');
-		cy.contains('start working');
+		cy.contains('Welcome to Skolaris', { 'timeout': 10000 });
 	});
 
 	it('Offers the Demo school for activation', () => {

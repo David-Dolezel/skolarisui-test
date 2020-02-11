@@ -53,8 +53,12 @@ Cypress.Commands.add('activateOrganisation', (id) => {
 	if (id === undefined)
 		id = 29144;
 
-	cy.log('Activating organisation');
-	localStorage.setItem('__amplify__guest.ttcontext.selectedorg', JSON.stringify({
+	var authData = JSON.parse(localStorage.getItem('__amplify__authorizationData')),
+		username = authData.data.username;
+	
+	cy.log('Activating organisation for user ' + username);
+	localStorage.setItem('__amplify__' + username + '.ttcontext.selectedorg', JSON.stringify({
 		'data': id
 	}));
 });
+
