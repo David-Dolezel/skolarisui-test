@@ -39,7 +39,6 @@ Cypress.Commands.add("login", (username, password) => {
 	})
 		.then((response) => {
 			// response.body is automatically serialized into JSON
-			expect(response.body).to.have.property('access_token');
 			localStorage.setItem('__amplify__authorizationData', JSON.stringify({
 				'data': {
 					'token': response.body.access_token,

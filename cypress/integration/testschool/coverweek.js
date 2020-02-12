@@ -1,19 +1,21 @@
-describe('Test school cover assignment', () => {
+describe('Test school cover week', () => {
 	beforeEach(() => {
 		cy.login('testuser@skolaris.net', 'skolaristesting');
 		cy.activateOrganisation(1257163);
 		cy.visit('/#coverweeks/1257215');
-		cy.contains('Calendar week starting', { 'timeout': 10000 });
+		cy.contains('Calendar week starting', { 'timeout': 20000 });
 	});
 
 	it('Opens cover assignment screen', () => {
-		//select the active timetable
-		var ttmenu = cy.get('paper-dropdown-menu');
-		ttmenu.click();
+		cy.on('uncaught:exception', Cypress.Skolaris.ignoreWebComponentsError);
 
-		ttmenu.shadowFind('paper-listbox')
-			.shadowFind('paper-item')
-			.shadowLast()
+		//select the active timetable
+		cy.get('paper-dropdown-menu')
+			.as('menu')
+			.click();
+
+		cy.get('@menu')
+			.shadowFind('paper-item:last')
 			.click();
 
 		//assign cover

@@ -11,6 +11,7 @@ describe('Login and logout', function() {
 		cy.get('form > paper-input[name="password"]')
 			.shadowType('badpassword');
 
+		cy.on('uncaught:exception', Cypress.Skolaris.ignoreWebComponentsError);
 		cy.get('form > paper-button')
 			.click();
 
@@ -52,6 +53,8 @@ describe('Login and logout', function() {
 	});
 
 	it('Logs out after clicking the logout button', () => {
+		cy.on('uncaught:exception', Cypress.Skolaris.ignoreWebComponentsError);
+		
 		//login
 		cy.get('paper-button.iconified')
 			.click();
@@ -60,9 +63,11 @@ describe('Login and logout', function() {
 
 		//logout
 		cy.get('user-panel paper-menu-button')
+			.as('menu')
 			.click();
 
-		cy.contains('Log out')
+		cy.get('@menu')
+			.shadowFind('paper-icon-item:last')
 			.click();
 
 		cy.url().should('contain', '#login')
@@ -73,7 +78,7 @@ describe('Login and logout', function() {
 	});
 
 	function isInWelcomeScreen() {
-		cy.contains('please activate an organisation', { 'timeout': 10000 });
+		cy.contains('please activate an organisation', { 'timeout': 20000 });
 	}
 });
 

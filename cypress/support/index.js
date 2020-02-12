@@ -18,3 +18,11 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+Cypress.Skolaris = {
+	'ignoreWebComponentsError': function(err, runnable) {
+		expect(err.message).to.include('Cannot read property \'tabIndex\' of undefined'); //this is related to web components, it's not relevant
+		return false;
+	}
+};
+
