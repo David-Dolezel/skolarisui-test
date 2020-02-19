@@ -15,5 +15,9 @@ describe('Demo school dashboard', () => {
 		cy.contains('Subjects');
 		cy.contains('Garden Work');
 	});
+
+	it('Activates term Spring 2020', () => {
+		cy.contains('Spring 2020');
+	});
 });
 
